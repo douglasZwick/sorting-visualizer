@@ -14,9 +14,9 @@ const sketch = (p: p5) =>
   p.draw = () =>
   {
     p.colorMode(p.HSB);
-    p.background(40);
+    p.background(10);
     p.noStroke();
-    p.fill(60, 90, 90);
+    p.fill(50, 90, 90);
 
     x += xSpeed;
     y += ySpeed;
