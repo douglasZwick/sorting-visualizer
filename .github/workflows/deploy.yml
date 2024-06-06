@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - release  # Change this to the branch you want to trigger the workflow
+  workflow_dispatch:
 
 jobs:
   build:
