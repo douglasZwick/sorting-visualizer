@@ -13,7 +13,10 @@ const sketch = (p: p5) =>
   
   p.draw = () =>
   {
-    p.background(220);
+    p.colorMode(p.HSB);
+    p.background(40);
+    p.noStroke();
+    p.fill(60, 90, 90);
 
     x += xSpeed;
     y += ySpeed;
