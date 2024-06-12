@@ -3,34 +3,43 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - release  # Change this to the branch you want to trigger the workflow
-  workflow_dispatch:
+      - release
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
+      # Install project dependencies
       - name: Install dependencies
         run: npm install
 
+      # Build the project
       - name: Build the project
         run: npm run build
 
+      # Configure git with user details
       - name: Configure git
         run: |
-          git config --global user.email "modusponens@gmail.com"
-          git config --global user.name "Doug Zwick"
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
 
+      # Set remote URL to use token and deploy using `gh-pages`
       - name: Deploy to GitHub Pages
-        run: npm run deploy
+        run: |
+          git remote set-url origin \
+            https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          npm run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Setting GH_TOKEN for gh-pages
