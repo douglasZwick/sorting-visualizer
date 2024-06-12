@@ -1,4 +1,6 @@
+import './style.css';
 import p5 from 'p5';
+
 
 const sketch = (p: p5) =>
 {
