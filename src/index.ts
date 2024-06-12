@@ -2,21 +2,24 @@ import p5 from 'p5';
 
 const sketch = (p: p5) =>
 {
-  let x = 200, y = 200;
-  let diameter = 50;
-  let xSpeed = 2, ySpeed = 2.5;
+  let x = 0, y = 0;
+  let diameter = 100;
+  let xSpeed = 1.89187, ySpeed = 2.51151;
 
   p.setup = () =>
   {
-    p.createCanvas(400, 400);
+    p.createCanvas(800, 450);
+
+    x = p.width / 2;
+    y = p.height / 2;
   };
   
   p.draw = () =>
   {
     p.colorMode(p.HSB);
     p.background(10);
-    p.noStroke();
-    p.fill(50, 90, 90);
+    p.stroke(60, 100, 100);
+    p.fill(350, 100, 90);
 
     x += xSpeed;
     y += ySpeed;
