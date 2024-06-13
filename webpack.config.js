@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const fs = require('fs');
 
@@ -10,12 +11,13 @@ module.exports = (env, argv) => {
   const assetsPath = path.resolve(__dirname, 'src', 'assets');
   const thereAreAssets = fs.existsSync(assetsPath) &&
     fs.readdirSync(assetsPath).length > 0;
-
+  
   const plugins = [
     new HtmlWebpackPlugin({
-      // Path to my template file
       template: 'src/index.html',
+      alwaysWriteToDisk: true,
     }),
+    new HtmlWebpackHarddiskPlugin(),
   ];
 
   if (thereAreAssets)
@@ -40,7 +42,7 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
+          use: [ 'style-loader', 'css-loader' ],
           exclude: /node_modules/,
         },
       ],
@@ -51,15 +53,26 @@ module.exports = (env, argv) => {
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      publicPath: '/',
     },
     plugins: plugins,
     devServer: {
       static: {
         directory: path.join(__dirname, 'dist'),
+        watch: true,
       },
       compress: true,
       port: 9000,
+      hot: true,
       open: true,
+      watchFiles: [ 'src/**/*.html' ],
+      client: {
+        logging: 'verbose',
+        overlay: {
+          warnings: true,
+          errors: true,
+        },
+      },
     },
   };
 };

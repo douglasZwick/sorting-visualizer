@@ -33,6 +33,12 @@ const sketch = (p: p5) =>
 
     p.ellipse(x, y, diameter, diameter);
   };
+
+  p.keyPressed = () =>
+  {
+    if (p.keyCode === 32)
+      throw new Error("Intentional error for debugging purposes");
+  };
 };
 
 new p5(sketch);
