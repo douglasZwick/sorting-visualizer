@@ -6,7 +6,7 @@ const sketch = (p: p5) =>
 {
   let x = 0, y = 0;
   let diameter = 100;
-  let xSpeed = 1.89187, ySpeed = 2.51151;
+  let xSpeed = 1.89183, ySpeed = 2.51151;
 
   p.setup = () =>
   {
@@ -21,7 +21,7 @@ const sketch = (p: p5) =>
     p.colorMode(p.HSB);
     p.background(10);
     p.stroke(60, 100, 100);
-    p.fill(350, 100, 90);
+    p.fill(350, 100, 85);
 
     x += xSpeed;
     y += ySpeed;
